@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lootefix", "lootefix\lootefix.csproj", "{2D52993C-3EA6-419E-AC97-C2EF7F6AB17F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{A064DE9E-0493-4C63-A5A2-043E41E3E435}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D52993C-3EA6-419E-AC97-C2EF7F6AB17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D52993C-3EA6-419E-AC97-C2EF7F6AB17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D52993C-3EA6-419E-AC97-C2EF7F6AB17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D52993C-3EA6-419E-AC97-C2EF7F6AB17F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A064DE9E-0493-4C63-A5A2-043E41E3E435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A064DE9E-0493-4C63-A5A2-043E41E3E435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A064DE9E-0493-4C63-A5A2-043E41E3E435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A064DE9E-0493-4C63-A5A2-043E41E3E435}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

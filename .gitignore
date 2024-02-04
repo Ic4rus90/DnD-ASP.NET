@@ -1,0 +1,45 @@
+# User related Idea files
+src/lootefix/.idea/**/workspace.xml
+src/lootefix/.idea/**/usage.statistics.xml
+src/lootefix/.idea/**/shelf
+src/lootefix/.idea/shelf
+src/lootefix/.idea/workspace.xml
+src/lootefix/.idea/usage.statistics.xml
+*.iml
+*.sln.DotSettings.user
+
+src/.idea/.idea.lootefix/.idea/watcherTasks.xml
+
+# Some database files
+app.db
+app.db-*
+
+
+# Compiled files
+.sass-cache
+
+# Temporary test results
+src/tests/TestResults
+src/tests/TestResults/*
+
+cmake-build-*
+obj
+[Bb]in
+venv
+*.db
+*.pyc
+*.swp
+*.swo
+*.iws
+
+# Executables
+*.exe
+
+
+
+# Temporary files
+Desktop.ini
+Thumbs.db
+.DS_Store
+.vscode
+

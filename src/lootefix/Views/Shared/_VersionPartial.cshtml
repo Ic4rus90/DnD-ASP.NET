@@ -1,0 +1,15 @@
+@using lootefix.Models;
+@using Version = lootefix.Models.Version
+
+@{ var version = Version.getVersionNumber();
+
+    if (version != "")
+    {
+        <p>Version: @version</p>
+    }
+
+    else
+    {
+        <p>Version: Not available</p>
+    }
+}

@@ -1,0 +1,137 @@
+
+/* Z-indexes */
+.zi1{
+  z-index: 1;
+}
+.zi2{
+  z-index: 2;
+}
+.zi3{
+  z-index: 3;
+}
+.zi4{
+  z-index: 4;
+}
+.zi5{
+  z-index: 5;
+}
+
+/* Max height */
+.mh-25{
+  max-height: 25vh;
+}
+.mh-50{
+  max-height: 50vh;
+}
+.mh-75{
+  max-height: 75vh;
+}
+.mh-100{
+  max-height: 100vh;
+}
+
+/* Min height */
+.min-h-25{
+  min-height: 25vh;
+}
+.min-h-50{
+  min-height: 50vh;
+}
+.min-h-75{
+  min-height: 75vh;
+}
+.min-h-100{
+  min-height: 100vh;
+}
+
+/* Widths */
+.w-fit{
+  width: fit-content;
+}
+.h-fit{
+  height: fit-content;
+}
+.w-available{
+  width: available;
+  width: -moz-available;
+}
+.h-available{
+  height: available;
+  height: -moz-available;
+}
+.w-90{
+  width: 90%;
+}
+/* Min width */
+.min-w-90{
+  min-width: 90%;
+}
+.min-w-25{
+  min-width: 25vh;
+}
+.min-w-50{
+  min-width: 50vh;
+}
+.min-w-75{
+  min-width: 75vh;
+}
+.min-w-100{
+  min-width: 100vh;
+}
+/* Max width */
+.max-w-90{
+  max-width: 90%;
+}
+.max-w-25{
+  max-width: 25%;
+}
+.max-w-50{
+  max-width: 50%;
+}
+.max-w-75{
+  max-width: 75%;
+}
+.max-w-100{
+  max-width: 100%;
+}
+
+/* Font sizes */
+.fs-7{
+  font-size: 0.9rem;
+}
+.fs-8{
+  font-size: 0.8rem;
+}
+.fs-8{
+  font-size: 0.7rem;
+}
+
+/* Padding */
+.p-revert {
+  padding: revert;
+}
+
+/* Cursor stuff */
+.cursor-default{
+  cursor: default;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+.pointer-event-none{
+  pointer-events: none;
+}
+
+/* Position absolute stuff */
+.center-vh{
+  position: absolute;
+  margin: auto !important;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text-overflow-ellipsis{
+  text-overflow: ellipsis;
+}

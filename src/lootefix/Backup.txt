@@ -1,0 +1,87 @@
+@using System.Text.RegularExpressions
+@model SingleAndListedItems
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- TODO: Left box -->
+<div>
+    
+</div>
+
+<div class="d-flex" style="margin-left: 15%">
+    <!-- Main box -->
+<div style="flex-grow: 2">
+    <!-- TODO: Sub navbar -->
+    <!--<div class="bg-danger ms-5" style="height: 20px"></div>-->
+        
+    
+    <!--Initially list all the different group inventories belonging to the given session-->
+    <!--Question regarding group inventories need a name to separate them from each other-->
+    
+    <!--Then, when inventory is clicked on, list out all the items in the given inventory-->
+    
+    
+    <!--
+    <h1 class="display-4">Inventory</h1>
+    <table id="groupInventory" class="table" data-giid="@Model.GroupInventory.Id">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Value</th>
+            <th scope="col">Rarity</th>
+            <th scope="col">Type</th>
+            <th scope="col">Description</th>
+            <th scope="col">Charges</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var item in Model.GroupInventory.Items)
+            {
+                <tr id="item-id-@item.Id">
+                    <th id="Item.Name" scope="row">@item.Name</th>
+                    <td id="Item.Value">@item.Value</td>
+                    <td id="Item.Rarity">@item.Rarity</td>
+                    <td id="Item.ItemType">@item.ItemType</td>
+                    <td id="Item.Description">@item.Description</td>
+                    <td id="Item.Charges">@item.Charges</td>
+                    
+                    <td class="px-0">
+                        <button id="editButton" class="btn btn-white p-0 d-block" data-id="@item.Id">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                            </svg>
+                        </button>
+                    </td>
+                    <td class="px-0">
+                        <button id="deleteButton" class="btn btn-white p-0 d-block" data-id="@item.Id">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+      <div>
+        <button id="newItem" data-giid="@Model.GroupInventory.Id" class="btn btn-grey rounded-circle d-block m-auto" style="width: 40px; height: 40px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+            </svg>
+        </button>
+    </div>
+    </div>
+    -->
+    <!-- Detail box -->
+    <div class="d-flex" style="flex-grow: 1">
+        <div class="vertical-line bg-grey shadow mx-2"></div>
+        <div class="p-2">
+            <i class="text-muted">Detailed item description for currently selected item</i>
+        </div>
+    </div>
+</div>

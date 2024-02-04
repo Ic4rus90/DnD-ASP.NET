@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "watch": false,
+    "lib": ["DOM", "ES2021"],
+    "outFile": "site.js",
+    "rootDir": "./src",
+//    "allowJs": true
+  },
+//  "exclude": [
+//    "./site*.js"
+//  ]
+}

@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Welcome!";
+    var applicationUser = UserManager.GetUserAsync(User).Result;
+}
+
+<div class="position-relative vh-100" style="margin-top: -60px">
+    <div class="m-auto mt-5 w-fit center-vh">
+        <img alt="Lootefix" height="150" src="/img/lootefix.png"/>
+        <h2 class="lead mt-2 text-center">making your adventure even more epic</h2>
+        <div class="d-flex justify-content-center mt-2">
+            @if (SignInManager.IsSignedIn(User) && applicationUser != null)
+            {
+                <a asp-controller="Home" asp-action="ChooseCampaign" class="btn btn-brown btn-lg m-1">Active Campaigns</a>
+            }
+            else
+            {
+                <a href="/Identity/Account/Login" class="btn btn-blue btn-lg m-1">Log In</a>
+                <a href="/Identity/Account/Register" class="btn btn-brown btn-lg m-1">New User</a>
+            }
+        </div>
+    </div>
+</div>

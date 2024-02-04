@@ -1,0 +1,23 @@
+﻿@model Session
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    ViewData["Title"] = "Join " + Model.Name;
+}
+<div class="m-auto mt-5 p-5 bg-dark1 shadow" style="max-width: 50rem">
+    <div class="text-center">
+        <h3>You have been invited to the following campaign:</h3>
+        <h1 class="old-english p-2 bg-dark2">@Model.Name</h1>
+        <br/>
+
+        <form method="post" asp-action="JoinCampaign">
+            <input asp-for="@Context.Request.RouteValues" type="hidden" value="@Context.Request.RouteValues"/>
+            <input type ="submit" value="Join Campaign" class="btn btn-lg btn-primary"/>
+        </form>
+    </div>
+</div>
+
+
+<!--TODO: Make this form execute AddUserToSession and DeleteInvite in the InviteController-->
+    

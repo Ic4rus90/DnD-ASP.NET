@@ -1,0 +1,67 @@
+/* These are the default asp.net styles */
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/*
+  General styling
+  Here you add whatever css you want
+  */
+
+@font-face {
+  font-family: "oldEnglish";
+  /* This source may show a warning in the IDE, but it is the right location when the project is running*/
+  src: url("../fonts/CloisterBlackLight-axjg.ttf"); 
+  
+}
+
+.old-english{
+  font-family: "oldEnglish", serif;
+}
+
+.bible-text p{
+  margin: 0;
+}
+
+::selection {
+  background-color: var(--bs-grey);
+  color: var(--bs-black);
+}
+
+.vertical-line{
+  width: 1px;
+  height: 100%;
+}
+
+/* Input inside table */
+table > tbody > tr > td > input{
+  width: 100%;
+}
+
+.navbar-nav
+{
+  font-size:1.5em !important;
+}
+
+
+/* Remove increase decrease stuff on button type number */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

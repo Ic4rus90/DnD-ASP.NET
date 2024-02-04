@@ -1,0 +1,251 @@
+﻿@using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Session
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div id="groupInventory" class="d-flex">
+    <!-- Main box -->
+    <div style="flex-grow: 2">
+        <!-- TODO: Sub navbar -->
+        <!--<div class="bg-danger ms-5" style="height: 20px"></div>-->
+        
+        <!--TODO: When inventory is clicked on, list out all the items in the given inventory.
+        Function for listing is further down. Need to transfer id from clicked groupinventory into that function-->
+
+        <!--TODO: When item is clicked on, list out all the details of the given item.-->
+        
+        <!--TODO: Add functionality for adding a group inventory-->
+
+        <!--The original version of this view is temporarily put in Backup.txt-->
+        
+        
+        <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills ms-3 p-3 bg-dark1 shadow" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="nav-link old-english border-1 border-bottom border-white fs-4 text-white" id="v-pills-title-tab" data-bs-toggle="pill" data-bs-target="#v-pills-title" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true" disabled>Group Inventories</button>
+                @{
+                    var c = 0;
+                    foreach (var groupInventory in Model.GroupInventories)
+                    {
+                        if (c == 0)
+                        {
+                            <button class="nav-link active" id="v-pills-@groupInventory.Id-tab" data-bs-toggle="pill" data-bs-target="#v-pills-@groupInventory.Id" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">@groupInventory.Name</button>
+                        }
+                        else
+                        {
+                            <button class="nav-link" id="v-pills-@groupInventory.Id-tab" data-bs-toggle="pill" data-bs-target="#v-pills-@groupInventory.Id" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">@groupInventory.Name</button>
+                        }
+                        c++;
+                    }
+                }
+                @{
+                    var user = await UserManager.GetUserAsync(User);
+                    if (user.Id == Model.DungeonMaster)
+                    {
+                        <a id="addInventoryButton" data-session-id="@Model.Id" class="position-relative btn btn-dark2" title="Add inventory">
+                            <div class="rounded-circle d-block m-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"></path>
+                                </svg>
+                            </div>
+                        </a>
+                    }
+                }   
+            </div>
+            <div class="tab-content m-3" id="v-pills-tabContent">
+                <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">...</div>
+                @{
+                    c = 0;
+                    foreach (var groupInventory in Model.GroupInventories)
+                    {
+                        if (c == 0)
+                        {
+                            <div class="tab-pane fade show active inventory" id="v-pills-@groupInventory.Id" data-giid="@groupInventory.Id" role="tabpanel" aria-labelledby="v-pills-@groupInventory.Id-tab" tabindex="@c">
+                                <partial name="_GroupInventoryPartial" model="groupInventory"/>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="tab-pane inventory" id="v-pills-@groupInventory.Id" data-giid="@groupInventory.Id" role="tabpanel" aria-labelledby="v-pills-@groupInventory.Id-tab" tabindex="@c">
+                                <partial name="_GroupInventoryPartial" model="groupInventory"/>
+                            </div>
+                        }
+                        c++;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail box -->
+    <div id="itemDetails" class="d-flex bg-dark1 max-w-50 d-none me-3 shadow" style="flex-grow: 3">
+        <!-- Show detail box -->
+        <div class="p-4 w-100 position-relative">
+            <div id="showItemDetails" class="d-none">
+                <div class="vertical-line bg-grey shadow mx-2"></div>
+                <div class="position-absolute p-2 top-0 start-0">
+                    <i id="itemCharges" class="px-1" title="Amount of charges">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-lightning-charge-fill" viewBox="0 0 16 16">
+                            <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
+                        </svg>
+                        <x></x>
+                    </i>
+                    <i id="itemValue" class="px-1" title="Amount of value">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+                            <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                        </svg>
+                        <x></x>
+                    </i>
+                </div>
+                @{
+                    if (user.Id == Model.DungeonMaster)
+                    {
+                        <button id="editButton" class="btn p-2 d-block position-absolute top-0 end-0" data-id="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                            </svg>
+                        </button>
+                    }
+                }
+                <br/>
+                <h4 id="itemName" class="mb-0 old-english"></h4>
+                <i class="text-muted ms-2 mb-2"><a id="itemRarity"></a>, <a id="itemType"></a></i>
+                <div id="itemDescription"></div>
+            </div>
+
+            <!-- Edit detail box -->
+            <div id="editItemDetails" class="d-none" data-id="">
+                <div class="vertical-line bg-grey shadow mx-2"></div>
+                <button id="cancelButton" class="btn p-2 d-block position-absolute top-0 end-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                    </svg>
+                </button>
+                <br/>
+                <div class="d-grid">
+                    <div class="form-floating">
+                        <input class="form-control" id="itemName">
+                        <label class="form-label" for="itemName">Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input class="form-control" id="itemValue" type="number">
+                        <label class="form-label" for="itemValue">Value</label>
+                    </div>
+                    <div class="form-floating">
+                        <input class="form-control" id="itemCharges" type="number">
+                        <label class="form-label" for="itemCharges">Charges</label>
+                    </div>
+                    <br/>
+                    <br/>
+                    <i class="text-muted ms-2 mb-2">
+                        <div id="itemRarity" class="btn-group">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Rarity
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Non-magical</a></li>
+                                <li><a class="dropdown-item" href="#">Common</a></li>
+                                <li><a class="dropdown-item" href="#">Uncommon</a></li>
+                                <li><a class="dropdown-item" href="#">Rare</a></li>
+                                <li><a class="dropdown-item" href="#">Very Rare</a></li>
+                                <li><a class="dropdown-item" href="#">Legendary</a></li>
+                                <li><a class="dropdown-item" href="#">Artifact</a></li>
+                            </ul>
+                        </div>
+                        <div id="itemType" class="btn-group">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Item Type
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Armor</a></li>
+                                <li><a class="dropdown-item" href="#">Weapon</a></li>
+                                <li><a class="dropdown-item" href="#">Potion</a></li>
+                                <li><a class="dropdown-item" href="#">Ring</a></li>
+                                <li><a class="dropdown-item" href="#">Rod</a></li>
+                                <li><a class="dropdown-item" href="#">Staff</a></li>
+                                <li><a class="dropdown-item" href="#">Wand</a></li>
+                                <li><a class="dropdown-item" href="#">Wondrous Item</a></li>
+                                <li><a class="dropdown-item" href="#">Miscellaneous</a></li>
+                            </ul>
+                        </div>
+                    </i>
+                    <div class="form-floating">
+                        <textarea class="form-control" id="itemDescription" style="height: 250px;"></textarea>
+                        <label class="form-label" for="itemCharges">Description</label>
+                    </div>
+                    <button id="saveButton" class="btn btn-outline-brown">Save</button>
+                </div>
+            </div>
+
+            <!-- Add detail box -->
+            <div id="addItemDetails" class="d-none">
+                <div class="vertical-line bg-grey shadow mx-2"></div>
+                <button id="cancelButton" class="btn p-2 d-block position-absolute top-0 end-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                      <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                    </svg>
+                </button>
+                <br/>
+                <div class="d-grid">
+                    <div class="form-floating">
+                        <input class="form-control" id="itemName">
+                        <label class="form-label" for="itemName">Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input class="form-control" id="itemValue" type="number">
+                        <label class="form-label" for="itemValue">Value</label>
+                    </div>
+                    <div class="form-floating">
+                        <input class="form-control" id="itemCharges" type="number">
+                        <label class="form-label" for="itemCharges">Charges</label>
+                    </div>
+                    <br/>
+                    <br/>
+                    <i class="text-muted ms-2 mb-2">
+                        <div id="itemRarity" class="btn-group">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Rarity
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Non-magical</a></li>
+                                <li><a class="dropdown-item" href="#">Common</a></li>
+                                <li><a class="dropdown-item" href="#">Uncommon</a></li>
+                                <li><a class="dropdown-item" href="#">Rare</a></li>
+                                <li><a class="dropdown-item" href="#">Very Rare</a></li>
+                                <li><a class="dropdown-item" href="#">Legendary</a></li>
+                                <li><a class="dropdown-item" href="#">Artifact</a></li>
+                            </ul>
+                        </div>
+                        <div id="itemType" class="btn-group">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Item Type
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Armor</a></li>
+                                <li><a class="dropdown-item" href="#">Weapon</a></li>
+                                <li><a class="dropdown-item" href="#">Potion</a></li>
+                                <li><a class="dropdown-item" href="#">Ring</a></li>
+                                <li><a class="dropdown-item" href="#">Rod</a></li>
+                                <li><a class="dropdown-item" href="#">Staff</a></li>
+                                <li><a class="dropdown-item" href="#">Wand</a></li>
+                                <li><a class="dropdown-item" href="#">Wondrous Item</a></li>
+                                <li><a class="dropdown-item" href="#">Miscellaneous</a></li>
+                            </ul>
+                        </div>
+                    </i>
+                    <div class="form-floating">
+                        <textarea class="form-control" id="itemDescription" style="height: 250px;"></textarea>
+                        <label class="form-label" for="itemCharges">Description</label>
+                    </div>
+                    <button id="saveButton" class="btn btn-outline-green">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

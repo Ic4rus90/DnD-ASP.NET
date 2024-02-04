@@ -1,0 +1,68 @@
+$theme-colors: (
+        "dark": #181616,
+        "dark1": #292727,
+        "dark2": #3a3838,
+        "dark3": #4b4949,
+        "black": #000,
+        "grey": #ccc,
+        "green": #3aa838,
+        "red": #aa3838,
+        "blue": #49b,
+        "white": #fff,
+        "brown": #b25424,
+        "primary": #b25424,
+        "danger": #aa3838
+);
+
+$primary: map-get($theme-colors, "brown");
+$text-muted: #6c757d;
+
+// Dark theme
+$body-bg: map-get($theme-colors, "dark");
+$body-color: map-get($theme-colors, "white");
+$modal-content-bg: map-get($theme-colors, "dark2");
+$dropdown-bg: map-get($theme-colors, "dark1");
+$dropdown-link-active-bg: map-get($theme-colors, "dark2");
+$dropdown-link-active-color: map-get($theme-colors, "grey");
+$dropdown-color: map-get($theme-colors, "white");
+$dropdown-link-color: map-get($theme-colors, "grey");
+$dropdown-link-hover-bg: map-get($theme-colors, "dark3");
+
+$link-color: map-get($theme-colors, "blue");
+$form-check-input-bg: map-get($theme-colors, "grey");
+$form-check-input-checked-bg-color: map-get($theme-colors, "brown");
+$nav-pills-link-active-bg: map-get($theme-colors, "brown");
+
+// Background and text colour for forms
+$input-disabled-bg: map-get($theme-colors, "dark1"); 
+$input-disabled-color: map-get($theme-colors, "grey");
+
+// tooltips settings
+$tooltip-max-width:                 200px;
+$tooltip-color:                     white;
+$tooltip-bg:                        map-get($theme-colors, "text-muted");
+$tooltip-opacity:                   1.0;
+$tooltip-margin:                    0;
+
+$tooltip-arrow-width:               .8rem;
+$tooltip-arrow-height:              .4rem;
+$tooltip-arrow-color:               $tooltip-bg;
+
+// No underline on links
+$link-decoration: none;
+
+// 0 rounding
+$enable-rounded: false;
+
+
+// Dropdown settings
+$zindex-dropdown: 1025;
+
+/* Include bootstrap css */
+@import "../lib/bootstrap/dist/scss/bootstrap";
+
+
+/* Custom css includes! */
+@import "src/general";
+@import "src/notification";
+@import "src/bs-like";

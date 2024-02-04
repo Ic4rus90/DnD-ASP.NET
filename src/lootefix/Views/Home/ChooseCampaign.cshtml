@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Session>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    ViewData["Title"] = "Choose your session";
+}
+<div class="m-auto mt-5 p-5 bg-dark1 shadow" style="max-width: 50rem">
+    <h1 class="m-auto display-4 old-english text-brown text-center mb-1">My campaigns</h1>
+    
+
+    <!-- Main box -->
+    <div id="sessionBox" class="w-100">
+        @{
+            var c = 1;
+            foreach (var session in Model)
+            {
+                <div class="bg-dark position-relative rounded-0 p-3">
+                    <span class="text-muted p-2 top-0 end-0 position-absolute sessionNum">#@c</span>
+                    <button id="createInvitationLinkButton-@session.Id" onclick="Invite.create(@session.Id)" class="btn btn-link bottom-0 px-2 py-0 end-0 position-absolute" type="button">Create Invitation Link</button>
+                    <a id="session-@session.Id"  asp-controller="Home" asp-action="Index" asp-route-id="@session.Id">@session.Name</a>
+                </div>
+                c++;
+            }
+        }
+        <a id="addSessionCard" class="rounded-0 p-3 position-relative btn btn-dark2 w-100">
+            <span class="text-muted p-2 top-0 end-0 position-absolute">New campaign</span>
+            <div class="rounded-circle d-block m-auto" style="width: 40px; height: 40px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                </svg>
+            </div>
+        </a>
+    </div>
+</div>
+

@@ -1,0 +1,29 @@
+#inviteLinkNotification {
+  visibility: hidden;
+  background: rgba(45, 135, 247, 0.6);
+  bottom: 40px;
+  position: absolute;
+  border-radius: 5px;
+  z-index: 1;
+  right: 10%;
+  text-align: right;
+  padding: 10px;
+  margin: 10px; }
+
+#inviteLinkNotification.display {
+  visibility: visible;
+  bottom: 100px;
+  animation: notificationAnimation 2.5s 1 normal;
+  animation-delay: 1.0s; }
+
+@keyframes notificationAnimation {
+  from {
+    bottom: 100px;
+    background: rgba(45, 135, 247, 0.6);
+    color: white; }
+  to {
+    bottom: 200px;
+    background: rgba(45, 135, 247, 0);
+    color: rgba(255, 255, 255, 0); } }
+
+/*# sourceMappingURL=notification.css.map */

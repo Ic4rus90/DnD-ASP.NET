@@ -1,0 +1,42 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 as test
+
+
+RUN apt update
+RUN apt install wget unzip -y
+RUN apt install chromium -y
+RUN apt install apt-transport-https \
+ca-certificates \
+curl \
+gnupg \
+hicolor-icon-theme \
+libcanberra-gtk* \
+libgl1-mesa-dri \
+libgl1-mesa-glx \
+libpango1.0-0 \
+libpulse0 \
+libv4l-0 -y
+
+RUN apt install udev
+
+
+RUN wget https://chromedriver.storage.googleapis.com/107.0.5304.62/chromedriver_linux64.zip -O chromedriver.zip
+#RUN wget https://chromedriver.storage.googleapis.com/108.0.5359.22/chromedriver_linux64.zip -O chromedriver.zip
+RUN unzip chromedriver.zip
+RUN mv ./chromedriver /usr/bin/chromedriver
+
+
+
+
+COPY . ./
+RUN dotnet restore "src/tests/tests.csproj"
+#RUN pwd
+#RUN dotnet test src/tests/tests.csproj
+RUN dotnet publish  -c Release -o release --no-restore "src/tests/tests.csproj"
+#RUN dotnet test --no-build -c Release --results-directory /testresults src/tests/tests.csproj
+
+
+#FROM mcr.microsoft.com/dotnet/aspnet:6.0
+#WORKDIR /app
+#COPY --from=test /app/release .
+#RUN dotnet test src/tests/tests.csproj
+ENTRYPOINT ["dotnet", "test", "src/tests/tests.csproj"]
